@@ -9,7 +9,8 @@ var index = require('./routes/index');
 var users = require('./routes/users');
 
 var app = express();
-
+var monk = require('monk');
+var db = monk("mongodb://<dbuser>:<dbpassword>@ds157980.mlab.com:57980/drawingtooldb-mm");
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'hbs');
