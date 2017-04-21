@@ -5,3 +5,24 @@ body {
 a {
   color: #00B7FF;
 }
+
+.jumbotron {
+  background-color: rgba(50, 104, 174, 0.85) !important;
+}
+
+header {
+  color: white;
+}
+
+header div button {
+  opacity: 1 !important;
+}
+
+form {
+  color: white;
+  display: inline-block;
+}
+
+form h3 {
+  color: rgb(26, 201, 26);
+}
