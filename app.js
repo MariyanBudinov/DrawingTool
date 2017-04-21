@@ -9,7 +9,6 @@ var db = monk("mongodb://<dbuser>:<dbpassword>@ds157980.mlab.com:57980/drawingto
 
 
 var index = require('./routes/index');
-var users = require('./routes/users');
 var login = require('./routes/login');
 
 var app = express();
