@@ -6,18 +6,99 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
 
-    <link rel="stylesheet" href="stylesheets\style.css">
+   
     <link rel="stylesheet" href="normalize-css/normalize.css">
     <link rel="stylesheet" href="bootstrap/dist/css/bootstrap.min.css">
     <link rel="application/x-font-ttf" href="bootstrap/dist/fonts/glyphicons-halflings-regular.ttf">
+    <link rel="stylesheet" href="stylesheets/style.css">
 
-    <title>Drawing Tool</title>
+
+
+    <title>MM Drawing Tool</title>
 </head>
 
 <body>
+    	<!-- MAIN CONTAINER  -->
+	<div id="wrapper">
+
+		<div class="row">
+			<!-- TOP NAVIGATION -->
+			<nav class="navbar navbar-fixed-top navbar-inverse">
+				<div class="container">
+					<div class="navbar-header">
+						<button class="navbar-toggle" type="button" data-target=".navbar-collapse" data-toggle="collapse">
+							<span class="icon-bar"></span> <span class="icon-bar"></span> <span class="icon-bar"></span>
+						</button>
+						<a class="navbar-brand" href="#">MM Drowing Tool</a>
+					</div>
+					<!-- /navbar-header  -->
+					<div class="collapse navbar-collapse">
+						<ul class="nav navbar-nav">
+							<li class="active"><a id="undo" role="menuitem" tabindex="-1" href="#">Undo</a></li>
+							<li><a id="redo" role="menuitem" tabindex="-1" href="#">Redo</a></li>
+							<li><a id="new" role="menuitem" tabindex="-1" href="#">New</a></li>
+							<li><a id="save" role="menuitem" tabindex="-1" href="#" data-toggle="modal" data-target="#aboutBox">Save</a></li>
+						</ul>
+					</div>
+					<!-- /.nav-collapse -->
+				</div>
+				<!-- /.container -->
+			</nav>
+			<!-- /TOP NAVIGATION -->
+		</div>
+		<!-- / END MAIN NAVIGATION -->
+		
+
+		<div class="row row-eq-height ">
+
+			<!-- LEFT NAVIGATION  -->
+			<div class="navbar navbar-default col-xs-3 col-sm-2" id="sidebarLeft" role="navigation">
+				<div class="container-fluid">
+
+					<ul class="nav nav-pills nav-stacked">					
+						<li ><a id="" href="#"> Brush</a></li>
+						<li ><a id="" href="#"> Brush</a></li>
+						<li ><a id="" href="#"> Brush</a></li>
+						<li ><a id="" href="#"> Brush</a></li>
+						<li ><a id="" href="#"> Brush</a></li>
+						<li ><a id="" href="#"> Brush</a></li>
+						<li ><a id="" href="#"> Brush</a></li>
+						<li ><a id="" href="#"> Brush</a></li>
+						<li ><a id="" href="#"> Brush</a></li>						
+					</ul>
+				</div>
+			</div>
+			<!-- / END LEFT NAVIGATION  -->
+
+			<!-- DRAWING TABLE  -->
+			<div id="structure-content" class="col-xs-8 col-sm-9">
+				<canvas id="structure-drawer">
+					Sorry, your browser doesn't support the &lt;canvas&gt; element.
+				</canvas>
+				
+			</div>
+			<!-- / DRAWING TABLE  -->
+
+		</div>
+		
+
+	</div>
+	<!-- /END MAIN CONTAINER -->
+	
+	<!--  ligne status bar -->
+	<footer  class="footer">
+      <div class="container">
+        <p class="text-muted">Place sticky footer content here.</p>
+      </div>
+    </footer>
+	<!-- /status bar -->
+	
 
 </body>
 
-    <script src="jquery/dist/jquery.min.js"></script>
+    <script src="/jquery/dist/jquery.min.js"></script>
+    <script src="/fabric.js/dist/fabric.js"></script>
+    <script src="/javascripts/brushes.js"></script>
+    <script src="/javascripts/functionality.js"></script>
 
 </html>

@@ -1,7 +1,51 @@
+/*html {
+    width: 100%;
+    height: 100%;
+}*/
+
 body {
-  font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
+    padding-top: 60px;
 }
 
-a {
-  color: #00B7FF;
+.row-eq-height {
+    display: -webkit-box;
+    display: -moz-box;
+    display: -ms-flexbox;
+    display: -webkit-flex;
+    display: flex;
+    flex: 0 0 auto;
+}
+
+.row-eq-height>div[class*='col-'] {
+    background-color: black;
+}
+
+
+/* Menu bar options styles
+-------------------------------------------------- */
+
+#collapseDisplayOptions a {
+    padding-bottom: 0.7%;
+    padding-left: 18%;
+    padding-right: 0%;
+    padding-top: 0.7%;
+}
+
+
+/* canvas drawer
+---------------------------------*/
+
+#structure-content {
+    padding: 0;
+    margin: 0;
+    border: 2px solid blue;
+    min-height: 100%;
+    position: relative;
+    overflow: hidden;
+}
+
+#structure-drawer {
+    border: solid 5px yellowgreen;
+    width: 100%;
+    height: 100%;
 }
