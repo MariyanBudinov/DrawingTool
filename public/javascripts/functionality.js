@@ -29,7 +29,6 @@ var canvas = new fabric.Canvas('structure-drawer', {
 });
 
 
-
 ///////////////////
 //PAINT CIRCLES///
 /////////////////
@@ -68,20 +67,20 @@ var canvas = new fabric.Canvas('structure-drawer', {
 // var pencilBrush = new fabric.PencilBrush(canvas);
 // canvas.freeDrawingBrush = pencilBrush;
 
-// var curcleBrush = new fabric.CircleBrush(canvas);
-// canvas.freeDrawingBrush = curcleBrush;
+// var markerBrush = new fabric.MarkerBrush(canvas);
+// canvas.freeDrawingBrush = markerBrush;
 
-// var paternBrush = new fabric.PatternBrush(canvas);
-// canvas.freeDrawingBrush = paternBrush;
+// var patternBrush = new fabric.PatternBrush(canvas);
+// canvas.freeDrawingBrush = patternBrush;
 
 // var crayonBrush = new fabric.CrayonBrush(canvas);
 // canvas.freeDrawingBrush = crayonBrush;
 
-var inkBrush = new fabric.InkBrush(canvas);
-canvas.freeDrawingBrush = inkBrush;
+var sprayBrush = new fabric.SprayBrush(canvas);
+canvas.freeDrawingBrush = sprayBrush;
 
-// var markerBrush = new fabric.MarkerBrush(canvas);
-// canvas.freeDrawingBrush = markerBrush;
+// var paintingRoller = new fabric.InkBrush(canvas);
+// canvas.freeDrawingBrush = paintingRoller;
 
-// var sprayBrush = new fabric.SprayBrush(canvas);
-// canvas.freeDrawingBrush = sprayBrush;
+// var curcleBrush = new fabric.CircleBrush(canvas);
+// canvas.freeDrawingBrush = curcleBrush;
