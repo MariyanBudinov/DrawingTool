@@ -1,6 +1,21 @@
 body {
-    background-image: url("/images/background.jpg");
-    padding-top: 60px;
+    padding-top: 80px;
+}
+
+
+/*---------------
+MAIN NAVIGATION
+-------------*/
+
+#logoImg {
+    padding-top: 13px;
+    width: 50px;
+    height: auto;
+    float: left;
+}
+
+#mainNav {
+    filter: drop-shadow(3px 3px 3px dodgerblue);
 }
 
 .row-eq-height {
@@ -12,32 +27,81 @@ body {
     flex: 0 0 auto;
 }
 
-.row-eq-height>div[class*='col-'] {
-    background-color: black;
+#uploadFile>input {
+    width: 0.1px;
+    height: 0.1px;
+    opacity: 0;
+    overflow: hidden;
+    position: absolute;
+    z-index: -1
+}
+
+#uploadFile>label:hover {
+    color: white;
+    cursor: pointer;
+}
+
+.MainTools {
+    width: 25px;
+    height: auto;
+    filter: hue-rotate(0deg);
+}
+
+.MainTools:hover {
+    filter: hue-rotate(350deg);
+    transition: filter 2s ease;
 }
 
 
-/* canvas drawer
----------------------------------*/
+/*------------------
+MAIN NAVIGATION END
+----------------*/
+
+
+/*-------------------
+CANVAS DRAWER START
+------------------*/
+
+canvas {
+    border-radius: 1%;
+}
 
 #structure-content {
     padding: 0;
     margin: 0 0 0 3%;
-    border: 2px solid black;
+    border: solid 2px #222;
     min-height: 100%;
     position: relative;
     overflow: hidden;
+    border-radius: 1.5%;
 }
 
 #structure-drawer {
-    border: solid 5px #2f9bf9;
+    border: solid 5px #337ab7;
     width: 100%;
     height: 100%;
 }
 
 
-/* range sliders START
-------------------------*/
+/*------------------
+ CANVAS DRAWER END
+-----------------*/
+
+
+/*--------------
+LEFT NAV START
+-------------*/
+
+#sidebarLeft {
+    background-color: #222;
+    border: black;
+    filter: drop-shadow(3px 3px 3px dodgerblue);
+}
+
+.BrushTools {
+    width: 40px;
+    height: auto;
+}
 
 #slider {
     width: 100%;
@@ -53,6 +117,10 @@ body {
     box-shadow: inset 0px 0px 1px 1px rgba(0, 0, 0, 0.9), 0px 1px 1px 0px rgba(255, 255, 255, 0.13);
 }
 
+#slider:hover {
+    background: black;
+}
+
 #opacitySlider {
     width: 100%;
     height: 15px;
@@ -65,6 +133,10 @@ body {
     -webkit-box-shadow: inset 0px 0px 1px 1px rgba(0, 0, 0, 0.9), 0px 1px 1px 0px rgba(255, 255, 255, 0.13);
     -moz-box-shadow: inset 0px 0px 1px 1px rgba(0, 0, 0, 0.9), 0px 1px 1px 0px rgba(255, 255, 255, 0.13);
     box-shadow: inset 0px 0px 1px 1px rgba(0, 0, 0, 0.9), 0px 1px 1px 0px rgba(255, 255, 255, 0.13);
+}
+
+#opacitySlider:hover {
+    background: black;
 }
 
 .bar {
@@ -92,13 +164,13 @@ body {
     -webkit-border-radius: 40px;
     -moz-border-radius: 40px;
     border-radius: 40px;
-    background: #2f9bf9;
+    background: #337ab7;
 }
 
 input[type="range"] {
     -webkit-appearance: none;
     background-color: black;
-    height: 2px;
+    height: 3px;
 }
 
 input[type="range"]::-webkit-slider-thumb {
@@ -106,8 +178,8 @@ input[type="range"]::-webkit-slider-thumb {
     position: relative;
     top: 0px;
     z-index: 1;
-    width: 11px;
-    height: 11px;
+    width: 20px;
+    height: 20px;
     cursor: pointer;
     -webkit-box-shadow: 0px 6px 5px 0px rgba(0, 0, 0, 0.6);
     -moz-box-shadow: 0px 6px 5px 0px rgba(0, 0, 0, 0.6);
@@ -116,6 +188,11 @@ input[type="range"]::-webkit-slider-thumb {
     -moz-border-radius: 40px;
     border-radius: 40px;
     background-image: -webkit-gradient(linear, left top, left bottom, color-stop(0%, #ebf1f6), color-stop(50%, #abd3ee), color-stop(51%, #89c3eb), color-stop(100%, #d5ebfb));
+}
+
+input[type="range"]::-webkit-slider-thumb:hover {
+    background-image: -webkit-gradient(linear, left top, left bottom, color-stop(0%, cyan), color-stop(40%, dodgerblue), color-stop(100%, dodgerblue));
+    ;
 }
 
 #rangeinput:hover~#rangevalue,
@@ -134,12 +211,9 @@ input[type="range"]::-webkit-slider-thumb {
     top: -70px;
 }
 
-
-/* Tool Tip */
-
 #rangevalue {
     padding: 5px;
-    color: #2f9bf9;
+    color: white;
     font-size: 15px;
     text-align: center;
     display: block;
@@ -168,7 +242,7 @@ input[type="range"]::-webkit-slider-thumb {
 
 #opacityRangevalue {
     padding: 5px;
-    color: #2f9bf9;
+    color: white;
     font-size: 15px;
     text-align: center;
     display: block;
@@ -199,17 +273,13 @@ input[type="range"]:focus {
     outline: none;
 }
 
-
-/* range sliders END
-----------------------*/
-
 #colorPicker {
     padding: 2px 5px;
     width: 100%;
     height: 30px;
     position: relative;
     margin: 50px auto 0px auto;
-    background: #2f9bf9;
+    background: #337ab7;
     -webkit-border-radius: 40px;
     -moz-border-radius: 40px;
     border-radius: 40px;
@@ -218,20 +288,20 @@ input[type="range"]:focus {
     box-shadow: inset 0px 0px 1px 1px rgba(0, 0, 0, 0.9), 0px 1px 1px 0px rgba(255, 255, 255, 0.13);
 }
 
+#colorPicker:hover {
+    background: dodgerblue;
+}
+
 .btn-block {
     margin-top: 50px;
 }
 
-.dropdown-menu>li {
-    display: block;
+label {
+    color: #9d9d9d;
+    font-weight: normal;
 }
 
-.BrushTools {
-    width: 40px;
-    height: auto;
-}
 
-.MainTools {
-    width: 20px;
-    height: auto;
-}
+/*------------
+LEFT NAV END
+-----------*/

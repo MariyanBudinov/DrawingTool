@@ -3,84 +3,111 @@ var canvas = $canvasSelector.get(0);
 var containerElement = canvas.parentElement;
 canvas.width = containerElement.offsetWidth;
 canvas.height = containerElement.offsetHeight;
-
 var ctx = canvas.getContext('2d');
 
-containerElement.addEventListener('resize', resizeCanvas, false);
-
-function resizeCanvas() {
-    canvas.style.width = '100%';
-    canvas.style.height = '100%';
-    canvas.width = containerElement.offsetWidth;
-    canvas.height = containerElement.offsetHeight;
-}
-resizeCanvas();
-
-//////////////////////////////////////////////////////////////
+/////////////////////////////////////////////////////////////////////////
 // FABRIC create a wrapper around native canvas element (with id="...")
-///////////////////////////////////////////////////////////////
+///////////////////////////////////////////////////////////////////////
 
 var canvas = new fabric.Canvas('structure-drawer', {
-    selectionColor: "yellow",
-    selectionLineWidth: 2,
     selection: true,
     isDrawingMode: true,
-    backgroundColor: 'white'
 });
 
+var $ = function(id) { return document.getElementById(id) };
 
-///////////////////
-//PAINT CIRCLES///
-/////////////////
+var drawingOptionsEl = $('brushesDropdown');
+var drawingLineWidthEl = $('rangeinput');
+var drawingLineOpacityEl = $('opacityRangeinput');
+var rangeValue = $('rangevalue');
+var opacityRangeValue = $('opacityRangevalue');
+var drawingColorEl = $('colorPicker');
+var drawingModeEl = $('changeMode');
+var clearEl = $('clearCanvas');
 
-// canvas.on('mouse:move', function(options) {
-//     if (options.target) {
-//         console.log('an object was clicked! ', options.target.type);
-//     }
-//     console.log(options.e.clientX, options.e.clientY);
+//////////////////
+//NEW BRASH CLASS
+////////////////
 
-//     var circle101 = new fabric.Circle({
-//         radius: 5,
-//         fill: 'black',
-//         left: options.e.clientX,
-//         top: options.e.clientY,
-//         selectable: false,
-//         opacity: 0.5
-//     });
-//     canvas.add(circle101);
-//     circle101.animate('radius', (Math.round(Math.random() * 20)), {
-//         onChange: canvas.renderAll.bind(canvas),
-//         duration: 1000
-
-//     });
-
-// });
-
-
-
-/////////////////////
-//NEW BRASH CLASS///
-///////////////////
-
-// var brush = new fabric.BaseBrush(canvas);
-
-// var pencilBrush = new fabric.PencilBrush(canvas);
-// canvas.freeDrawingBrush = pencilBrush;
-
-// var markerBrush = new fabric.MarkerBrush(canvas);
-// canvas.freeDrawingBrush = markerBrush;
-
-// var patternBrush = new fabric.PatternBrush(canvas);
-// canvas.freeDrawingBrush = patternBrush;
-
-// var crayonBrush = new fabric.CrayonBrush(canvas);
-// canvas.freeDrawingBrush = crayonBrush;
-
+var pencilBrush = new fabric.PencilBrush(canvas);
+var markerBrush = new fabric.MarkerBrush(canvas);
+var patternBrush = new fabric.PatternBrush(canvas);
+var crayonBrush = new fabric.CrayonBrush(canvas);
 var sprayBrush = new fabric.SprayBrush(canvas);
-canvas.freeDrawingBrush = sprayBrush;
+var paintingRoller = new fabric.InkBrush(canvas);
+var curcleBrush = new fabric.CircleBrush(canvas);
 
-// var paintingRoller = new fabric.InkBrush(canvas);
-// canvas.freeDrawingBrush = paintingRoller;
+//////////////////////
+//NEW BRASH CLASS END
+////////////////////
 
-// var curcleBrush = new fabric.CircleBrush(canvas);
-// canvas.freeDrawingBrush = curcleBrush;
+clearEl.onclick = function() { canvas.clear() };
+
+drawingModeEl.onclick = function() {
+    canvas.isDrawingMode = !canvas.isDrawingMode;
+    if (canvas.isDrawingMode) {
+        drawingModeEl.innerHTML = 'Cancel Drawing Mode';
+    } else {
+        drawingModeEl.innerHTML = 'Enter Drawing Mode';
+    }
+};
+
+function getEventTarget(e) {
+    e = e || window.event;
+    return e.target || e.srcElement;
+}
+
+var brushesList = document.getElementById('brushesDropdown');
+brushesList.onclick = function(event) {
+    var target = getEventTarget(event);
+
+    switch (target.id) {
+        case 'Pencil':
+            canvas.freeDrawingBrush = pencilBrush;
+            break;
+        case 'Marker':
+            canvas.freeDrawingBrush = markerBrush;
+            break;
+        case 'Line Brush':
+            canvas.freeDrawingBrush = patternBrush;
+            break;
+        case 'Pastelle':
+            canvas.freeDrawingBrush = crayonBrush;
+            break;
+        case 'Spray':
+            canvas.freeDrawingBrush = sprayBrush;
+            break;
+        case 'Painting Roller':
+            canvas.freeDrawingBrush = paintingRoller;
+            break;
+        case 'Circle Brush':
+            canvas.freeDrawingBrush = curcleBrush;
+            break;
+        default:
+            canvas.freeDrawingBrush = pencilBrush;
+    }
+
+    if (canvas.freeDrawingBrush) {
+        canvas.freeDrawingBrush.color = drawingColorEl.value;
+        canvas.freeDrawingBrush.width = parseInt(drawingLineWidthEl.value, 10) || 1;
+        canvas.freeDrawingBrush.opacity = drawingLineOpacityEl.value / 100 || 1;
+    }
+};
+
+drawingColorEl.onchange = function() {
+    canvas.freeDrawingBrush.color = this.value;
+};
+drawingLineWidthEl.onchange = function() {
+    canvas.freeDrawingBrush.width = parseInt(this.value, 10) || 1;
+    rangeValue.innerHTML = canvas.freeDrawingBrush.width;
+};
+drawingLineOpacityEl.onchange = function() {
+    canvas.freeDrawingBrush.opacity = this.value / 100;
+    opacityRangeValue.innerHTML = canvas.freeDrawingBrush.opacity;
+};
+
+if (canvas.freeDrawingBrush) {
+    canvas.freeDrawingBrush.color = drawingColorEl.value;
+    canvas.freeDrawingBrush.width = parseInt(drawingLineWidthEl.value, 10) || 1;
+    canvas.freeDrawingBrush.opacity = drawingLineOpacityEl.value / 100 || 1;
+}
