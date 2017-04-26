@@ -20,5 +20,18 @@
     "morgan": "~1.8.1",
     "normalize.css": "^6.0.0",
     "serve-favicon": "~2.4.2"
-  }
+  },
+  "description": "Paint-like online drawing tool",
+  "main": "app.js",
+  "devDependencies": {},
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/MariyanBudinov/DrawingTool.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/MariyanBudinov/DrawingTool/issues"
+  },
+  "homepage": "https://github.com/MariyanBudinov/DrawingTool#readme"
 }

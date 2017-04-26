@@ -18,6 +18,7 @@
     "bootstrap": "^3.3.7",
     "jquery": "^3.2.1",
     "angular": "^1.6.4",
-    "normalize-css": "normalize.css#^6.0.0"
+    "normalize-css": "normalize.css#^6.0.0",
+    "fabric.js": "fabric#^1.7.9"
   }
 }
