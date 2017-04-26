@@ -1,6 +1,6 @@
    (function(fabric) {
        /**
-        * CrayonBrush class
+        * CrayonBrush class ONE
         * @class fabric.CrayonBrush
         * @extends fabric.BaseBrush
         */
@@ -173,7 +173,7 @@
 
 
        /**
-        * InkBrush class
+        * InkBrush class TWO
         * @class fabric.InkBrush
         * @extends fabric.BaseBrush
         */
@@ -307,7 +307,7 @@
 
 
        /**
-        * MarkerBrush class
+        * MarkerBrush class THREE
         * @class fabric.MarkerBrush
         * @extends fabric.BaseBrush
         */
@@ -384,7 +384,7 @@
 
 
        /**
-        * SprayBrush class
+        * SprayBrush class FOUR
         * @class fabric.SprayBrush
         * @extends fabric.BaseBrush
         */

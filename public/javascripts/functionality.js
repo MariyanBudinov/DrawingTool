@@ -14,19 +14,25 @@ var canvas = new fabric.Canvas('structure-drawer', {
     isDrawingMode: true,
 });
 
-var $ = function(id) { return document.getElementById(id) };
+///////////////
+//DOM ELEMENTS
+/////////////
 
-var drawingOptionsEl = $('brushesDropdown');
-var drawingLineWidthEl = $('rangeinput');
-var drawingLineOpacityEl = $('opacityRangeinput');
-var rangeValue = $('rangevalue');
-var opacityRangeValue = $('opacityRangevalue');
-var drawingColorEl = $('colorPicker');
-var drawingModeEl = $('changeMode');
-var clearEl = $('clearCanvas');
+var $id = function(id) { return document.getElementById(id) };
+
+var drawingOptionsEl = $id('brushesDropdown');
+var drawingLineWidthEl = $id('rangeinput');
+var drawingLineOpacityEl = $id('opacityRangeinput');
+var rangeValue = $id('rangevalue');
+var opacityRangeValue = $id('opacityRangevalue');
+var drawingColorEl = $id('colorPicker');
+var drawingModeEl = $id('changeMode');
+var clearEl = $id('clearCanvas');
+var saveEl = $id('savePNG');
+var paintBucket = $id('PaintBucket')
 
 //////////////////
-//NEW BRASH CLASS
+//INITIAL BRASHES
 ////////////////
 
 var pencilBrush = new fabric.PencilBrush(canvas);
@@ -37,11 +43,31 @@ var sprayBrush = new fabric.SprayBrush(canvas);
 var paintingRoller = new fabric.InkBrush(canvas);
 var curcleBrush = new fabric.CircleBrush(canvas);
 
-//////////////////////
-//NEW BRASH CLASS END
-////////////////////
+/////////////////////
+//MAIN NAV FUNCTIONS
+///////////////////
 
-clearEl.onclick = function() { canvas.clear() };
+$("#savePNG").click(function() {
+    canvas.isDrawingMode = false;
+    drawingModeEl.innerHTML = 'Enter Drawing Mode';
+
+    if (!window.localStorage) { alert("This function is not supported by your browser."); return; }
+    window.open(canvas.toDataURL('png'));
+});
+
+clearEl.onclick = function() {
+    alert('You want to clear your paint!?')
+    canvas.clear()
+};
+
+paintBucket.onclick = function() {
+    canvas.backgroundColor = drawingColorEl.value;
+    canvas.renderAll();
+};
+
+//////////////////////
+// LEFT NAV FUNCTIONS
+/////////////////////
 
 drawingModeEl.onclick = function() {
     canvas.isDrawingMode = !canvas.isDrawingMode;
