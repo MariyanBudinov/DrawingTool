@@ -5,7 +5,7 @@ var logger = require('morgan');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
 var monk = require('monk');
-var db = monk("mongodb://<dbuser>:<dbpassword>@ds157980.mlab.com:57980/drawingtooldb-mm");
+var db = monk("mongodb://mariyan:1234@ds157980.mlab.com:57980/drawingtooldb-mm");
 
 
 var index = require('./routes/index');
@@ -25,6 +25,10 @@ app.use(cookieParser());
 app.use(express.static(__dirname+ '/public'));
 app.use(express.static(__dirname+ '/bower_components'));
 
+app.use(function(req, res, next){
+    req.db = db;
+    next();
+});
 
 app.use('/login', login);
 app.use('/', index);
