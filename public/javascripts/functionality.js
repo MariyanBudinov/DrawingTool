@@ -58,6 +58,12 @@ $("#savePNG").click(function() {
 // LEFT NAV FUNCTIONS
 /////////////////////
 
+$("#toolsBtnToggle").click(function(event){
+    event.preventDefault();
+    $("#sidebarLeft").toggleClass("sidebarWidth");
+    $("#sidebarLeft").toggleClass("col-md-3 col-xs-12 col-sm-10 col-lg-3");
+});
+
 $("#clearCanvas").click(function() {
     $("#brushesButton").removeClass("disabled");
     alert('Are you sure?')
