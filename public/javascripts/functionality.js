@@ -12,6 +12,7 @@ var ctx = canvas.getContext('2d');
 var canvas = new fabric.Canvas('structure-drawer', {
     selection: true,
     isDrawingMode: true,
+    backgroundColor: "white"
 });
 
 ///////////////
