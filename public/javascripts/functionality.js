@@ -83,8 +83,7 @@ function getEventTarget(e) {
     return e.target || e.srcElement;
 }
 
-var brushesList = document.getElementById('brushesDropdown');
-brushesList.onclick = function(event) {
+$("#brushesDropdown").click(function(event) {
     var target = getEventTarget(event);
 
     switch (target.id) {
@@ -118,7 +117,7 @@ brushesList.onclick = function(event) {
         canvas.freeDrawingBrush.width = parseInt(drawingLineWidthEl.value, 10) || 1;
         canvas.freeDrawingBrush.opacity = drawingLineOpacityEl.value / 100 || 1;
     }
-};
+});
 
 drawingColorEl.onchange = function() {
     canvas.freeDrawingBrush.color = this.value;
