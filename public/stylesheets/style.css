@@ -1,5 +1,6 @@
 body {
     padding-top: 80px;
+    background-image: url("/images/background.jpg")
 }
 
 
@@ -15,7 +16,7 @@ MAIN NAVIGATION
 }
 
 #mainNav {
-    filter: drop-shadow(3px 3px 3px dodgerblue);
+    filter: drop-shadow(3px 3px 3px black);
 }
 
 .row-eq-height {
@@ -95,7 +96,7 @@ LEFT NAV START
 #sidebarLeft {
     background-color: #222;
     border: black;
-    filter: drop-shadow(3px 3px 3px dodgerblue);
+    filter: drop-shadow(3px 3px 3px black);
 }
 
 .BrushTools {
@@ -134,7 +135,6 @@ LEFT NAV START
     -moz-box-shadow: inset 0px 0px 1px 1px rgba(0, 0, 0, 0.9), 0px 1px 1px 0px rgba(255, 255, 255, 0.13);
     box-shadow: inset 0px 0px 1px 1px rgba(0, 0, 0, 0.9), 0px 1px 1px 0px rgba(255, 255, 255, 0.13);
 }
-
 
 #opacitySlider:hover {
     background: black;
@@ -326,4 +326,3 @@ label {
 /*------------
 LEFT NAV END
 -----------*/
-

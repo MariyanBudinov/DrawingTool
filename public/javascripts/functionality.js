@@ -20,16 +20,13 @@ var canvas = new fabric.Canvas('structure-drawer', {
 
 var $id = function(id) { return document.getElementById(id) };
 
-var drawingOptionsEl = $id('brushesDropdown');
+var brushesButtonEl = $id('brushesButton');
 var drawingLineWidthEl = $id('rangeinput');
 var drawingLineOpacityEl = $id('opacityRangeinput');
 var rangeValue = $id('rangevalue');
 var opacityRangeValue = $id('opacityRangevalue');
 var drawingColorEl = $id('colorPicker');
 var drawingModeEl = $id('changeMode');
-var clearEl = $id('clearCanvas');
-var saveEl = $id('savePNG');
-var paintBucket = $id('PaintBucket')
 
 //////////////////
 //INITIAL BRASHES
@@ -49,34 +46,40 @@ var curcleBrush = new fabric.CircleBrush(canvas);
 
 $("#savePNG").click(function() {
     canvas.isDrawingMode = false;
-    drawingModeEl.innerHTML = 'Enter Drawing Mode';
-
+    drawingModeEl.innerHTML = '<img src="/images/paletteIcon.png" width=20 > Enter Drawing';
+    $("#brushesButton").addClass("disabled");
+    brushesButtonEl.innerHTML = '<img src="/images/cupIcon.png" width=20 > BRUSHES <span class="caret"></span>';
     if (!window.localStorage) { alert("This function is not supported by your browser."); return; }
     window.open(canvas.toDataURL('png'));
 });
 
-clearEl.onclick = function() {
-    alert('You want to clear your paint!?')
-    canvas.clear()
-};
-
-paintBucket.onclick = function() {
-    canvas.backgroundColor = drawingColorEl.value;
-    canvas.renderAll();
-};
 
 //////////////////////
 // LEFT NAV FUNCTIONS
 /////////////////////
 
-drawingModeEl.onclick = function() {
+$("#clearCanvas").click(function() {
+    $("#brushesButton").removeClass("disabled");
+    alert('Are you sure?')
+    canvas.clear()
+});
+
+$("#PaintBucket").click(function() {
+    canvas.backgroundColor = drawingColorEl.value;
+    canvas.renderAll();
+});
+
+$("#changeMode").click(function() {
     canvas.isDrawingMode = !canvas.isDrawingMode;
     if (canvas.isDrawingMode) {
-        drawingModeEl.innerHTML = 'Cancel Drawing Mode';
+        drawingModeEl.innerHTML = '<img src="/images/handDirections.png" width=20 > Cancel Drawing';
+        $("#brushesButton").removeClass("disabled");
     } else {
-        drawingModeEl.innerHTML = 'Enter Drawing Mode';
+        drawingModeEl.innerHTML = '<img src="/images/paletteIcon.png" width=20 > Enter Drawing';
+        $("#brushesButton").addClass("disabled");
+        brushesButtonEl.innerHTML = '<img src="/images/cupIcon.png" width=20 > BRUSHES <span class="caret"></span>';
     }
-};
+});
 
 function getEventTarget(e) {
     e = e || window.event;
@@ -85,33 +88,38 @@ function getEventTarget(e) {
 
 $("#brushesDropdown").click(function(event) {
     var target = getEventTarget(event);
-
     switch (target.id) {
         case 'Pencil':
             canvas.freeDrawingBrush = pencilBrush;
+            brushesButtonEl.innerHTML = '<img src="/images/pencilIcon.png" width=20 > Pencil <span class="caret"></span>';
             break;
         case 'Marker':
             canvas.freeDrawingBrush = markerBrush;
+            brushesButtonEl.innerHTML = '<img src="/images/markerIcon.png" width=20 > Marker <span class="caret"></span>';
             break;
         case 'Line Brush':
             canvas.freeDrawingBrush = patternBrush;
+            brushesButtonEl.innerHTML = '<img src="/images/linesIcon.png" width=20 > Line Brush <span class="caret"></span>';
             break;
         case 'Pastelle':
             canvas.freeDrawingBrush = crayonBrush;
+            brushesButtonEl.innerHTML = '<img src="/images/pastelIcon.png" width=20 > Pastelle <span class="caret"></span>';
             break;
         case 'Spray':
             canvas.freeDrawingBrush = sprayBrush;
+            brushesButtonEl.innerHTML = '<img src="/images/sprayIcon.png" width=20 > Spray <span class="caret"></span>';
             break;
         case 'Painting Roller':
             canvas.freeDrawingBrush = paintingRoller;
+            brushesButtonEl.innerHTML = '<img src="/images/paintingRollerIcon.png" width=20 > Painting Roller <span class="caret"></span>';
             break;
         case 'Circle Brush':
             canvas.freeDrawingBrush = curcleBrush;
+            brushesButtonEl.innerHTML = '<img src="/images/circleIcon.png" width=20 > Circle Brush <span class="caret"></span>';
             break;
         default:
             canvas.freeDrawingBrush = pencilBrush;
     }
-
     if (canvas.freeDrawingBrush) {
         canvas.freeDrawingBrush.color = drawingColorEl.value;
         canvas.freeDrawingBrush.width = parseInt(drawingLineWidthEl.value, 10) || 1;
@@ -119,17 +127,19 @@ $("#brushesDropdown").click(function(event) {
     }
 });
 
-drawingColorEl.onchange = function() {
+$("#colorPicker").change(function() {
     canvas.freeDrawingBrush.color = this.value;
-};
-drawingLineWidthEl.onchange = function() {
+});
+
+$("#rangeinput").change(function() {
     canvas.freeDrawingBrush.width = parseInt(this.value, 10) || 1;
     rangeValue.innerHTML = canvas.freeDrawingBrush.width;
-};
-drawingLineOpacityEl.onchange = function() {
+});
+
+$("#opacityRangeinput").change(function() {
     canvas.freeDrawingBrush.opacity = this.value / 100;
     opacityRangeValue.innerHTML = canvas.freeDrawingBrush.opacity;
-};
+});
 
 if (canvas.freeDrawingBrush) {
     canvas.freeDrawingBrush.color = drawingColorEl.value;
