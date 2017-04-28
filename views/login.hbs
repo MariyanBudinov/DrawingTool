@@ -16,36 +16,56 @@
 </head>
 
 <body style="background-image:url(/images/background.jpg)">
+    <header class="container">
+        <form action="/login" method="post" class="form-singin col-lg-5 col-md-6 col-sm-6 col-xs-12">
+            <h1 class="form-signin-heading" style="text-align: center">Welcome to Drawing Tool!</h1>
+            <div class="form-group">
+                <label for="exampleInputEmail1" class="sr-only">Email address</label>
+                <input type="text" class="form-control" name="username" id="exampleInputEmail1" placeholder="Email" required autofocus>
+            </div>
+            <div class="form-group">
+                <label for="exampleInputEmail1" class="sr-only">Password</label>
+                <input type="password" class="form-control" name="password" id="exampleInputEmail1" placeholder="Password" required>
+            </div>
+            <div class="form-group">
+                <button class="btn btn-large btn-success">Sign in</button>
+                <a id="fbLogin" class="loginButtons btn btn-large btn-primary" href="/auth/facebook/callback">Login with Facebook</a>
+            </div>
+            <div class='form-group error' style="color:white;">
+                {{message}}
+            </div>
+        </form>
 
-    {{!--
-    <div class="container">--}}
-        <div class="col-md-12">
-            <header class="container">
-                <div class="col-md-12">
-                    <h1 class="page-header" style="text-align: center">Welcome to Drawing Tool!</h1>
-                    {{!--<p class="lead col-md-offset-4">A project by Mariyan and Momchil</p>--}}
-                </div>
-                <fieldset  class="col-md-12">
-                    <form action="/login" method="post" class="container-fluid col-md-offset-4 col-md-4">
-                        <div class="form-group">
-                            <label for="exampleInputEmail1">Email address</label>
-                            <input type="text" class="form-control" name="username" id="exampleInputEmail1" placeholder="Email">
-                        </div>
-                        <div class="form-group">
-                            <label for="exampleInputEmail1">Password</label>
-                            <input type="password" class="form-control" name="password" id="exampleInputEmail1" placeholder="Password">
-                        </div>
-                        <button class="btn btn-large btn-success col-md-4 col-md-offset-4">Sign in</button>
-                    </form>
-                </fieldset>
-            </header>
-        </div>
-        <div class='error col-md-12' style="color:white;">
-            {{message}}
-        </div>
-        
+
+    </header>
+
+
+
 </body>
 
 <script src="/jquery/dist/jquery.min.js"></script>
+<script>
+    window.fbAsyncInit = function () {
+        FB.init({
+            appId: '1487666597973757',
+            cookie: true,
+            xfbml: true,
+            version: 'v2.8'
+        });
+        FB.AppEvents.logPageView();
+        //FB.getLoginStatus(function (response) {
+        //  statusChangeCallback(response);
+        //});
+    };
+
+    (function (d, s, id) {
+        var js, fjs = d.getElementsByTagName(s)[0];
+        if (d.getElementById(id)) { return; }
+        js = d.createElement(s); js.id = id;
+        js.src = "//connect.facebook.net/en_US/sdk.js";
+        fjs.parentNode.insertBefore(js, fjs);
+    }(document, 'script', 'facebook-jssdk'));
+
+</script>
 
 </html>

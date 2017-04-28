@@ -8,7 +8,8 @@ var session = require('express-session');
 var mongodb = require('mongodb');
 var monk = require('monk');
 var passport = require('passport');
-var facebookStrategy = require('passport-facebook').Strategy;
+var FacebookStrategy = require('passport-facebook').Strategy;
+var fbLogin = require('./routes/passport');
 var db = monk("mongodb://mariyan:1234@ds157980.mlab.com:57980/drawingtooldb-mm");
 
 
@@ -38,22 +39,52 @@ app.use(session({
     saveUninitialized: true
 }));
 
-//Facebook Login
-var FACEBOOK_APP_ID = 1487666597973757,
-    FACEBOOK_SECRET = '4aeefd80f5a57fbf189882ef94e35eb7';
+app.use(passport.initialize());
+app.use(passport.session());
 
-// passport.use(new FacebookStrategy({
-//     clientID: FACEBOOK_APP_ID,
-//     clientSecret: FACEBOOK_SECRET,
-//     callbackURL: "http://drawing-tool-mm.herokuapp.com/auth/facebook/callback"
-// },
-//     function (accessToken, refreshToken, profile, done) {
-//         User.findOrCreate(..., function (err, user) {
-//             if (err) { return done(err); }
-//             done(null, user);
-//         });
-//     }
-// ));
+passport.serializeUser(function (user, done) {
+    done(null, user);
+});
+
+passport.deserializeUser(function (user, done) {
+    done(null, user);
+});
+
+//Facebook Login
+var FACEBOOK_APP_ID = 1487666597973757;
+var FACEBOOK_SECRET = '4aeefd80f5a57fbf189882ef94e35eb7';
+
+passport.use(new FacebookStrategy({
+    clientID: FACEBOOK_APP_ID,
+    clientSecret: FACEBOOK_SECRET,
+    callbackURL: "http://localhost:3000/auth/facebook/callback" || "http://drawing-tool-mm.herokuapp.com/auth/facebook/callback"
+},
+    function (accessToken, refreshToken, profile, done) {
+        var facebookUsers = db.get('facebookUsers');
+        facebookUsers.findOne({
+            'facebook.id': profile.id
+        }, function (err, user) {
+            if (err) {
+                return done(err);
+            }
+            if (!user) {
+                facebookUsers.insert(
+                    ({
+                        name: profile.displayName,
+
+                        username: profile.username,
+                        provider: 'facebook',
+
+                        facebook: profile._json
+                    }));
+
+                return done(err, user);
+            } else {
+                return done(err, user);
+            }
+        });
+    }
+));
 
 app.get('/auth/facebook', passport.authenticate('facebook'));
 
@@ -62,6 +93,9 @@ app.get('/auth/facebook/callback',
         successRedirect: '/',
         failureRedirect: '/login'
     }));
+
+
+// app.use(passport);
 
 //Database
 app.use(function (req, res, next) {
@@ -78,7 +112,7 @@ function requireLogin(req, res, next) {
 }
 
 app.use('/login', login);
-app.use('/', requireLogin, index);
+app.use('/', index);
 
 // catch 404 and forward to error handler
 // app.use(function(req, res, next) {

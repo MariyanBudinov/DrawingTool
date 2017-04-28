@@ -2,8 +2,19 @@ body {
   font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
 }
 
-a {
-  color: #00B7FF;
+button>a {
+  color: white;
+  display: block;
+  box-sizing: content-box;
+}
+
+button#fbLogin:hover {
+  text-decoration: none;
+}
+
+button>a:link {
+  color: white;
+  text-decoration: none;
 }
 
 .jumbotron {
@@ -19,10 +30,73 @@ header div button {
 }
 
 form {
+  margin: 0 30% 0 30%;
   color: white;
   display: inline-block;
 }
 
+@media screen and (max-width: 400px){
+  form {
+    margin: 0;
+  }
+}
+
+@media screen and (min-width: 401px) and (max-width: 600px){
+  form {
+    margin: 0;
+  }
+}
+
+@media screen and (min-width: 601px) and (max-width: 760px){
+  form {
+    margin: 0;
+  }
+}
+
+@media screen and (min-width: 761px) and (max-width: 1024px){
+  form {
+    margin: 0 25% 0 25%;
+  }
+}
+
+#fbLogin {
+  float: right;
+}
+
 form h3 {
   color: rgb(26, 201, 26);
+}
+
+.form-signin {
+  max-width: 330px;
+  padding: 15px;
+}
+.form-signin .form-signin-heading,
+.form-signin .checkbox {
+  margin-bottom: 10px;
+}
+.form-signin .checkbox {
+  font-weight: normal;
+}
+.form-signin .form-control {
+  position: relative;
+  height: auto;
+  -webkit-box-sizing: border-box;
+     -moz-box-sizing: border-box;
+          box-sizing: border-box;
+  padding: 10px;
+  font-size: 16px;
+}
+.form-signin .form-control:focus {
+  z-index: 2;
+}
+.form-signin input[type="email"] {
+  margin-bottom: -1px;
+  border-bottom-right-radius: 0;
+  border-bottom-left-radius: 0;
+}
+.form-signin input[type="password"] {
+  margin-bottom: 10px;
+  border-top-left-radius: 0;
+  border-top-right-radius: 0;
 }

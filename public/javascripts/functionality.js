@@ -54,7 +54,9 @@ $("#savePNG").click(function() {
     window.open(canvas.toDataURL('png'));
 });
 
-
+$('fbLogin').click(function(event) {
+    event.preventDefault();
+});
 //////////////////////
 // LEFT NAV FUNCTIONS
 /////////////////////

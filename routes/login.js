@@ -13,14 +13,9 @@ router.post('/', function (req, res, next) {
       req.session.username = username;
       res.redirect('/');
     } else {
-      res.render('login', { message: 'Are probvai pak moi chovek' });
+      res.render('login', { message: 'Invalid username or password! Try again ' });
     }
   });
-
-  // if (r == 'p@p') {
-  //   req.session.username = 'p@p';
-  //   res.redirect('/');
-  // }
 });
 
 
