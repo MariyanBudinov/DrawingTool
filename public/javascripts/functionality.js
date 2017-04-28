@@ -69,6 +69,8 @@ $("#clearCanvas").click(function() {
     $("#brushesButton").removeClass("disabled");
     alert('Are you sure?')
     canvas.clear()
+    canvas.backgroundColor = "white";
+    canvas.renderAll();
 });
 
 $("#PaintBucket").click(function() {
