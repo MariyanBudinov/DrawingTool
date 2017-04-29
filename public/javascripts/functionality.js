@@ -34,12 +34,82 @@ var drawingModeEl = $id('changeMode');
 ////////////////
 
 var pencilBrush = new fabric.PencilBrush(canvas);
-var markerBrush = new fabric.MarkerBrush(canvas);
-var patternBrush = new fabric.PatternBrush(canvas);
-var crayonBrush = new fabric.CrayonBrush(canvas);
 var sprayBrush = new fabric.SprayBrush(canvas);
-var paintingRoller = new fabric.InkBrush(canvas);
+var patternBrush = new fabric.PatternBrush(canvas);
+/**
+ * vLinePatternBrush class
+ * @class fabric.vLinePatternBrush
+ */
+var vLinePatternBrush = new fabric.PatternBrush(canvas);
+vLinePatternBrush.getPatternSrc = function() {
+
+    var patternCanvas = fabric.document.createElement('canvas');
+    patternCanvas.width = patternCanvas.height = 10;
+    var ctx = patternCanvas.getContext('2d');
+
+    ctx.strokeStyle = this.color;
+    ctx.lineWidth = 5;
+    ctx.beginPath();
+    ctx.moveTo(5, 0);
+    ctx.lineTo(5, 10);
+    ctx.closePath();
+    ctx.stroke();
+
+    return patternCanvas;
+};
+/**
+ * hLinePatternBrush class
+ * @class fabric.hLinePatternBrush
+ */
+var hLinePatternBrush = new fabric.PatternBrush(canvas);
+hLinePatternBrush.getPatternSrc = function() {
+
+    var patternCanvas = fabric.document.createElement('canvas');
+    patternCanvas.width = patternCanvas.height = 10;
+    var ctx = patternCanvas.getContext('2d');
+
+    ctx.strokeStyle = this.color;
+    ctx.lineWidth = 5;
+    ctx.beginPath();
+    ctx.moveTo(0, 5);
+    ctx.lineTo(10, 5);
+    ctx.closePath();
+    ctx.stroke();
+
+    return patternCanvas;
+};
+/**
+ * squarePatternBrush class
+ * @class fabric.squarePatternBrush
+ */
+var squarePatternBrush = new fabric.PatternBrush(canvas);
+squarePatternBrush.getPatternSrc = function() {
+
+    var squareWidth = 10,
+        squareDistance = 2;
+
+    var patternCanvas = fabric.document.createElement('canvas');
+    patternCanvas.width = patternCanvas.height = squareWidth + squareDistance;
+    var ctx = patternCanvas.getContext('2d');
+    patternCanvas.style.backgroundColor = '#555';
+    ctx.fillStyle = this.color;
+    ctx.fillRect(0, 0, squareWidth, squareWidth);
+
+    return patternCanvas;
+};
+/**
+ * texturePatternBrush class
+ * @class fabric.texturePatternBrush
+ */
+var img = new Image();
+img.src = '/images/lava.jpg';
+
+var texturePatternBrush = new fabric.PatternBrush(canvas);
+texturePatternBrush.source = img;
+
 var curcleBrush = new fabric.CircleBrush(canvas);
+var dropperBrush = new fabric.DropperBrush(canvas);
+var rainbowBrush = new fabric.RainbowBrush(canvas);
 
 /////////////////////
 //MAIN NAV FUNCTIONS
@@ -102,32 +172,45 @@ $("#brushesDropdown").click(function(event) {
     switch (target.id) {
         case 'Pencil':
             canvas.freeDrawingBrush = pencilBrush;
-            brushesButtonEl.innerHTML = '<img src="/images/pencilIcon.png" width=20 > Pencil <span class="caret"></span>';
-            break;
-        case 'Marker':
-            canvas.freeDrawingBrush = markerBrush;
-            brushesButtonEl.innerHTML = '<img src="/images/markerIcon.png" width=20 > Marker <span class="caret"></span>';
-            break;
-        case 'Line Brush':
-            canvas.freeDrawingBrush = patternBrush;
-            brushesButtonEl.innerHTML = '<img src="/images/linesIcon.png" width=20 > Line Brush <span class="caret"></span>';
-            break;
-        case 'Pastelle':
-            canvas.freeDrawingBrush = crayonBrush;
-            brushesButtonEl.innerHTML = '<img src="/images/pastelIcon.png" width=20 > Pastelle <span class="caret"></span>';
+            brushesButtonEl.innerHTML = '<img src="/images/pencilIcon.png" width=20 > ' + target.id + ' <span class="caret"></span>';
             break;
         case 'Spray':
             canvas.freeDrawingBrush = sprayBrush;
-            brushesButtonEl.innerHTML = '<img src="/images/sprayIcon.png" width=20 > Spray <span class="caret"></span>';
+            brushesButtonEl.innerHTML = '<img src="/images/sprayIcon.png" width=20 > ' + target.id + ' <span class="caret"></span>';
             break;
-        case 'Painting Roller':
-            canvas.freeDrawingBrush = paintingRoller;
-            brushesButtonEl.innerHTML = '<img src="/images/paintingRollerIcon.png" width=20 > Painting Roller <span class="caret"></span>';
+        case 'Doted Brush':
+            canvas.freeDrawingBrush = patternBrush;
+            brushesButtonEl.innerHTML = '<img src="/images/linesIcon.png" width=20 > ' + target.id + ' <span class="caret"></span>';
+            break;
+        case 'V.Line Brush':
+            canvas.freeDrawingBrush = vLinePatternBrush;
+            brushesButtonEl.innerHTML = '<img src="/images/linesIcon.png" width=20 > ' + target.id + ' <span class="caret"></span>';
+            break;
+        case 'H.Line Brush':
+            canvas.freeDrawingBrush = hLinePatternBrush;
+            brushesButtonEl.innerHTML = '<img src="/images/linesIcon.png" width=20 > ' + target.id + ' <span class="caret"></span>';
+            break;
+        case 'Square Brush':
+            canvas.freeDrawingBrush = squarePatternBrush;
+            brushesButtonEl.innerHTML = '<img src="/images/linesIcon.png" width=20 > ' + target.id + ' <span class="caret"></span>';
+            break;
+        case 'Texture Brush':
+            canvas.freeDrawingBrush = texturePatternBrush;
+            brushesButtonEl.innerHTML = '<img src="/images/linesIcon.png" width=20 > ' + target.id + ' <span class="caret"></span>';
             break;
         case 'Circle Brush':
             canvas.freeDrawingBrush = curcleBrush;
-            brushesButtonEl.innerHTML = '<img src="/images/circleIcon.png" width=20 > Circle Brush <span class="caret"></span>';
+            brushesButtonEl.innerHTML = '<img src="/images/circleIcon.png" width=20 > ' + target.id + ' <span class="caret"></span>';
             break;
+        case 'Dropper':
+            canvas.freeDrawingBrush = dropperBrush;
+            brushesButtonEl.innerHTML = '<img src="/images/circleIcon.png" width=20 > ' + target.id + ' <span class="caret"></span>';
+            break;
+        case 'Rainbow Brush':
+            canvas.freeDrawingBrush = rainbowBrush;
+            brushesButtonEl.innerHTML = '<img src="/images/circleIcon.png" width=20 > ' + target.id + ' <span class="caret"></span>';
+            break;
+
         default:
             canvas.freeDrawingBrush = pencilBrush;
     }
