@@ -9,7 +9,7 @@ var mongodb = require('mongodb');
 var monk = require('monk');
 var passport = require('passport');
 var FacebookStrategy = require('passport-facebook').Strategy;
-var fbLogin = require('./routes/passport');
+var fbLogin = require('./routes/passport')(app,passport);
 var db = monk("mongodb://mariyan:1234@ds157980.mlab.com:57980/drawingtooldb-mm");
 
 

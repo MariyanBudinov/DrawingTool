@@ -7,7 +7,7 @@ var passport = require('passport');
 var FacebookStrategy = require('passport-facebook').Strategy;
 
 //Facebook Login
-module.exports.facebookLogin = function (req, res, next) {
+module.exports = function (app, passport) {
 
     app.use(passport.initialize());
     app.use(passport.session());
