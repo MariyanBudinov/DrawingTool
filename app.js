@@ -98,9 +98,9 @@ passport.use(new FacebookStrategy({
                         facebook: profile._json
                     }));
 
-                return done(err, user);
+                return done(null, user);
             } else {
-                return done(err, user);
+                return done(null, user);
             }
         });
     }
