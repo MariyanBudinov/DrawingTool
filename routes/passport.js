@@ -9,8 +9,13 @@ var FacebookStrategy = require('passport-facebook').Strategy;
 //Facebook Login
 module.exports = function (app, passport) {
 
-    app.use(passport.initialize());
-    app.use(passport.session());
+    router.use(passport.initialize());
+    router.use(passport.session());
+    router.use(session({
+        secret: 'momchil',
+        resave: true,
+        saveUninitialized: true
+    }));
 
     passport.serializeUser(function (user, done) {
         done(null, user._id);
@@ -67,6 +72,7 @@ module.exports = function (app, passport) {
             successRedirect: 'http://drawing-tool-mm.herokuapp.com',
             failureRedirect: 'http://drawing-tool-mm.herokuapp.com/login'
         }));
+    return passport;
 }
 
 
