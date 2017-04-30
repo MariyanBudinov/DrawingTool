@@ -50,12 +50,23 @@ app.use(passport.initialize());
 app.use(passport.session());
 
 passport.serializeUser(function (user, done) {
-    done(null, user);
+    done(null, user._id);
 });
 
-passport.deserializeUser(function (user, done) {
-    done(null, user);
+passport.deserializeUser(function (_id, done) {
+    var facebookUsers = db.get('facebookUsers');
+    facebookUsers.findById(_id, function (err, user){
+        done(err, user);
+    });
 });
+
+// passport.serializeUser(function (user, done) {
+//     done(null, user);
+// });
+
+// passport.deserializeUser(function (user, done) {
+//     done(null, user);
+// });
 
 //Facebook Login
 var FACEBOOK_APP_ID = 1487666597973757;
@@ -65,7 +76,7 @@ var FACEBOOK_SECRET = '4aeefd80f5a57fbf189882ef94e35eb7';
 passport.use(new FacebookStrategy({
     clientID: FACEBOOK_APP_ID,
     clientSecret: FACEBOOK_SECRET,
-    callbackURL: "http://drawing-tool-mm.herokuapp.com/auth/facebook/callback" 
+    callbackURL: "http://drawing-tool-mm.herokuapp.com/auth/facebook/callback"
     //  "http://localhost:3000/auth/facebook/callback" || 
 },
     function (accessToken, refreshToken, profile, done) {
