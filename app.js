@@ -60,10 +60,12 @@ passport.deserializeUser(function (user, done) {
 var FACEBOOK_APP_ID = 1487666597973757;
 var FACEBOOK_SECRET = '4aeefd80f5a57fbf189882ef94e35eb7';
 
+
 passport.use(new FacebookStrategy({
     clientID: FACEBOOK_APP_ID,
     clientSecret: FACEBOOK_SECRET,
-    callbackURL: "http://localhost:3000/auth/facebook/callback" || "http://drawing-tool-mm.herokuapp.com/auth/facebook/callback"
+    callbackURL: "http://localhost:3000/auth/facebook/callback" || "http://drawing-tool-mm.herokuapp.com/auth/facebook/callback" 
+     
 },
     function (accessToken, refreshToken, profile, done) {
         var facebookUsers = db.get('facebookUsers');
@@ -122,21 +124,21 @@ app.use('/login', login);
 app.use('/', requireLogin, index);
 
 //catch 404 and forward to error handler
-app.use(function (req, res, next) {
-    var err = new Error('Not Found');
-    err.status = 404;
-    next(err);
-});
+// app.use(function (req, res, next) {
+//     var err = new Error('Not Found');
+//     err.status = 404;
+//     next(err);
+// });
 
-// error handler
-app.use(function (err, req, res, next) {
-    // set locals, only providing error in development
-    res.locals.message = err.message;
-    res.locals.error = req.app.get('env') === 'development' ? err : {};
+// // error handler
+// app.use(function (err, req, res, next) {
+//     // set locals, only providing error in development
+//     res.locals.message = err.message;
+//     res.locals.error = req.app.get('env') === 'development' ? err : {};
 
-    // render the error page
-    res.status(err.status || 500);
-    res.render('error');
-});
+//     // render the error page
+//     res.status(err.status || 500);
+//     res.render('error');
+//});
 
 module.exports = app;
