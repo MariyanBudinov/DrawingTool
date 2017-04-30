@@ -60,20 +60,12 @@ module.exports = function (app, passport) {
         }
     ));
 
-    app.get('/auth/facebook', passport.authenticate('facebook'));
-
-    app.get('/auth/facebook/callback',
-        passport.authenticate('facebook', {
-            successRedirect: 'http://drawing-tool-mm.herokuapp.com',
-            failureRedirect: 'http://drawing-tool-mm.herokuapp.com/login'
-        }));
-
     router.get('/auth/facebook', passport.authenticate('facebook'));
 
     router.get('/auth/facebook/callback',
         passport.authenticate('facebook', {
-            successRedirect: '/',
-            failureRedirect: '/login'
+            successRedirect: 'http://drawing-tool-mm.herokuapp.com',
+            failureRedirect: 'http://drawing-tool-mm.herokuapp.com/login'
         }));
 }
 
