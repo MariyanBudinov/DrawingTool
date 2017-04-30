@@ -21,7 +21,7 @@ router.post('/', function (req, res, next) {
 
 
 router.get('/', function (req, res, next) {
-  if (req.session.username) {
+  if (req.session.username || req.user) {
     res.redirect('/');
   } else {
     res.render('login');
