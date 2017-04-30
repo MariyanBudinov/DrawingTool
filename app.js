@@ -9,7 +9,7 @@ var mongodb = require('mongodb');
 var monk = require('monk');
 var passport = require('passport');
 var FacebookStrategy = require('passport-facebook').Strategy;
-var fbLogin = require('./routes/passport')(app, passport);
+// var fbLogin = require('./routes/passport')(app, passport);
 var db = monk("mongodb://mariyan:1234@ds157980.mlab.com:57980/drawingtooldb-mm");
 
 
@@ -68,13 +68,7 @@ passport.deserializeUser(function (user, done) {
     done(null, user);
 });
 
-
-
-
-
-
-
-Facebook Login
+// Facebook Login
 var FACEBOOK_APP_ID = 1487666597973757;
 var FACEBOOK_SECRET = '4aeefd80f5a57fbf189882ef94e35eb7';
 
