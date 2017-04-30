@@ -64,8 +64,8 @@ var FACEBOOK_SECRET = '4aeefd80f5a57fbf189882ef94e35eb7';
 passport.use(new FacebookStrategy({
     clientID: FACEBOOK_APP_ID,
     clientSecret: FACEBOOK_SECRET,
-    callbackURL: "http://localhost:3000/auth/facebook/callback" || "http://drawing-tool-mm.herokuapp.com/auth/facebook/callback" 
-     
+    callbackURL: "http://drawing-tool-mm.herokuapp.com/auth/facebook/callback" 
+    //  "http://localhost:3000/auth/facebook/callback" || 
 },
     function (accessToken, refreshToken, profile, done) {
         var facebookUsers = db.get('facebookUsers');
@@ -98,8 +98,8 @@ app.get('/auth/facebook', passport.authenticate('facebook'));
 
 app.get('/auth/facebook/callback',
     passport.authenticate('facebook', {
-        successRedirect: '/',
-        failureRedirect: '/login'
+        successRedirect: 'http://drawing-tool-mm.herokuapp.com',
+        failureRedirect: 'http://drawing-tool-mm.herokuapp.com/login'
     }));
 
 
