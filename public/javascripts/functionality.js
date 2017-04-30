@@ -153,7 +153,7 @@ $("#PaintBucket").click(function() {
 $("#changeMode").click(function() {
     canvas.isDrawingMode = !canvas.isDrawingMode;
     if (canvas.isDrawingMode) {
-        drawingModeEl.innerHTML = '<img src="/images/handDirections.png" width=20 > Cancel Drawing';
+        drawingModeEl.innerHTML = '<span class="glyphicon glyphicon-move"></span> Cancel Drawing';
         $("#brushesButton").removeClass("disabled");
     } else {
         drawingModeEl.innerHTML = '<img src="/images/paletteIcon.png" width=20 > Enter Drawing';
@@ -178,37 +178,33 @@ $("#brushesDropdown").click(function(event) {
             canvas.freeDrawingBrush = sprayBrush;
             brushesButtonEl.innerHTML = '<img src="/images/sprayIcon.png" width=20 > ' + target.id + ' <span class="caret"></span>';
             break;
-        case 'Doted Brush':
+        case 'Doted':
             canvas.freeDrawingBrush = patternBrush;
-            brushesButtonEl.innerHTML = '<img src="/images/linesIcon.png" width=20 > ' + target.id + ' <span class="caret"></span>';
+            brushesButtonEl.innerHTML = '<img src="/images/dotedBrushIcon.png" width=20 > ' + target.id + ' <span class="caret"></span>';
             break;
-        case 'V.Line Brush':
+        case 'V.Line':
             canvas.freeDrawingBrush = vLinePatternBrush;
-            brushesButtonEl.innerHTML = '<img src="/images/linesIcon.png" width=20 > ' + target.id + ' <span class="caret"></span>';
+            brushesButtonEl.innerHTML = '<img src="/images/vLineIcon.png" width=20 > ' + target.id + ' <span class="caret"></span>';
             break;
-        case 'H.Line Brush':
+        case 'H.Line':
             canvas.freeDrawingBrush = hLinePatternBrush;
-            brushesButtonEl.innerHTML = '<img src="/images/linesIcon.png" width=20 > ' + target.id + ' <span class="caret"></span>';
+            brushesButtonEl.innerHTML = '<img src="/images/hLineIcon.png" width=20 > ' + target.id + ' <span class="caret"></span>';
             break;
-        case 'Square Brush':
+        case 'Square':
             canvas.freeDrawingBrush = squarePatternBrush;
-            brushesButtonEl.innerHTML = '<img src="/images/linesIcon.png" width=20 > ' + target.id + ' <span class="caret"></span>';
+            brushesButtonEl.innerHTML = '<img src="/images/squareIcon.png" width=20 > ' + target.id + ' <span class="caret"></span>';
             break;
-        case 'Texture Brush':
+        case 'Texture':
             canvas.freeDrawingBrush = texturePatternBrush;
-            brushesButtonEl.innerHTML = '<img src="/images/linesIcon.png" width=20 > ' + target.id + ' <span class="caret"></span>';
+            brushesButtonEl.innerHTML = '<img src="/images/textureIcon.png" width=20 > ' + target.id + ' <span class="caret"></span>';
             break;
-        case 'Circle Brush':
+        case 'Circle':
             canvas.freeDrawingBrush = curcleBrush;
             brushesButtonEl.innerHTML = '<img src="/images/circleIcon.png" width=20 > ' + target.id + ' <span class="caret"></span>';
             break;
-        case 'Dropper':
-            canvas.freeDrawingBrush = dropperBrush;
-            brushesButtonEl.innerHTML = '<img src="/images/circleIcon.png" width=20 > ' + target.id + ' <span class="caret"></span>';
-            break;
-        case 'Rainbow Brush':
+        case 'Rainbow':
             canvas.freeDrawingBrush = rainbowBrush;
-            brushesButtonEl.innerHTML = '<img src="/images/circleIcon.png" width=20 > ' + target.id + ' <span class="caret"></span>';
+            brushesButtonEl.innerHTML = '<img src="/images/rainbowIcon.png" width=20 > ' + target.id + ' <span class="caret"></span>';
             break;
 
         default:

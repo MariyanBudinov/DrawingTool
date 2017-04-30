@@ -4,6 +4,7 @@ body {
     overflow: auto;
 }
 
+
 /*---------------
 MAIN NAVIGATION
 -------------*/
@@ -46,21 +47,11 @@ MAIN NAVIGATION
     cursor: pointer;
 }
 
-.MainTools {
-    width: 25px;
-    height: auto;
-    filter: hue-rotate(0deg);
-}
-
-.MainTools:hover {
-    filter: hue-rotate(350deg);
-    transition: filter 2s ease;
-}
-
 
 /*------------------
 MAIN NAVIGATION END
 ----------------*/
+
 
 /*-------------------
 CANVAS DRAWER START
@@ -115,7 +106,6 @@ LEFT NAV START
     width: 0;
     overflow: hidden;
 }
-
 
 .BrushTools {
     width: 40px;
