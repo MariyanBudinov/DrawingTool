@@ -15,6 +15,7 @@ var db = monk("mongodb://mariyan:1234@ds157980.mlab.com:57980/drawingtooldb-mm")
 
 var index = require('./routes/index');
 var login = require('./routes/login');
+var logout = require('./routes/logout');
 
 var app = express();
 // view engine setup
@@ -122,6 +123,7 @@ function requireLogin(req, res, next) {
 
 app.use('/login', login);
 app.use('/', requireLogin, index);
+app.use('/logout', logout);
 
 //catch 404 and forward to error handler
 // app.use(function (req, res, next) {
