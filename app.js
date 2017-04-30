@@ -46,19 +46,19 @@ app.use(session({
     saveUninitialized: true
 }));
 
-app.use(passport.initialize());
-app.use(passport.session());
+// app.use(passport.initialize());
+// app.use(passport.session());
 
-passport.serializeUser(function (user, done) {
-    done(null, user._id);
-});
+// passport.serializeUser(function (user, done) {
+//     done(null, user._id);
+// });
 
-passport.deserializeUser(function (_id, done) {
-    var facebookUsers = db.get('facebookUsers');
-    facebookUsers.findById(_id, function (err, user){
-        done(err, user);
-    });
-});
+// passport.deserializeUser(function (_id, done) {
+//     var facebookUsers = db.get('facebookUsers');
+//     facebookUsers.findById(_id, function (err, user){
+//         done(err, user);
+//     });
+// });
 
 // passport.serializeUser(function (user, done) {
 //     done(null, user);
@@ -68,51 +68,57 @@ passport.deserializeUser(function (_id, done) {
 //     done(null, user);
 // });
 
+
+
+
+
+
+
 //Facebook Login
-var FACEBOOK_APP_ID = 1487666597973757;
-var FACEBOOK_SECRET = '4aeefd80f5a57fbf189882ef94e35eb7';
+// var FACEBOOK_APP_ID = 1487666597973757;
+// var FACEBOOK_SECRET = '4aeefd80f5a57fbf189882ef94e35eb7';
 
 
-passport.use(new FacebookStrategy({
-    clientID: FACEBOOK_APP_ID,
-    clientSecret: FACEBOOK_SECRET,
-    callbackURL: "http://drawing-tool-mm.herokuapp.com/auth/facebook/callback"
-    //  "http://localhost:3000/auth/facebook/callback" || 
-},
-    function (accessToken, refreshToken, profile, done) {
-        var facebookUsers = db.get('facebookUsers');
-        facebookUsers.findOne({
-            'facebook.id': profile.id
-        }, function (err, user) {
-            if (err) {
-                return done(err);
-            }
-            if (!user) {
-                facebookUsers.insert(
-                    ({
-                        name: profile.displayName,
+// passport.use(new FacebookStrategy({
+//     clientID: FACEBOOK_APP_ID,
+//     clientSecret: FACEBOOK_SECRET,
+//     callbackURL: "http://drawing-tool-mm.herokuapp.com/auth/facebook/callback"
+//     //  "http://localhost:3000/auth/facebook/callback" || 
+// },
+//     function (accessToken, refreshToken, profile, done) {
+//         var facebookUsers = db.get('facebookUsers');
+//         facebookUsers.findOne({
+//             'facebook.id': profile.id
+//         }, function (err, user) {
+//             if (err) {
+//                 return done(err);
+//             }
+//             if (!user) {
+//                 facebookUsers.insert(
+//                     ({
+//                         name: profile.displayName,
 
-                        username: profile.username,
-                        provider: 'facebook',
+//                         username: profile.username,
+//                         provider: 'facebook',
 
-                        facebook: profile._json
-                    }));
+//                         facebook: profile._json
+//                     }));
 
-                return done(null, user);
-            } else {
-                return done(null, user);
-            }
-        });
-    }
-));
+//                 return done(null, user);
+//             } else {
+//                 return done(null, user);
+//             }
+//         });
+//     }
+// ));
 
-app.get('/auth/facebook', passport.authenticate('facebook'));
+// app.get('/auth/facebook', passport.authenticate('facebook'));
 
-app.get('/auth/facebook/callback',
-    passport.authenticate('facebook', {
-        successRedirect: 'http://drawing-tool-mm.herokuapp.com',
-        failureRedirect: 'http://drawing-tool-mm.herokuapp.com/login'
-    }));
+// app.get('/auth/facebook/callback',
+//     passport.authenticate('facebook', {
+//         successRedirect: 'http://drawing-tool-mm.herokuapp.com',
+//         failureRedirect: 'http://drawing-tool-mm.herokuapp.com/login'
+//     }));
 
 
 

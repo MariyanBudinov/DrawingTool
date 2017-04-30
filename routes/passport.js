@@ -6,20 +6,19 @@ var monk = require('monk');
 var passport = require('passport');
 var FacebookStrategy = require('passport-facebook').Strategy;
 
-router.use(passport.initialize());
-router.use(passport.session());
-
-passport.serializeUser(function (user, done) {
-    done(null, user);
-});
-
-passport.deserializeUser(function (user, done) {
-    done(null, user);
-});
-
-
 //Facebook Login
 module.exports.facebookLogin = function (req, res, next) {
+
+    router.use(passport.initialize());
+    router.use(passport.session());
+
+    passport.serializeUser(function (user, done) {
+        done(null, user);
+    });
+
+    passport.deserializeUser(function (user, done) {
+        done(null, user);
+    });
     var FACEBOOK_APP_ID = 1487666597973757;
     var FACEBOOK_SECRET = '4aeefd80f5a57fbf189882ef94e35eb7';
 
@@ -60,7 +59,6 @@ module.exports.facebookLogin = function (req, res, next) {
             });
         }
     ));
-}
 
 router.get('/auth/facebook', passport.authenticate('facebook'));
 
@@ -69,12 +67,8 @@ router.get('/auth/facebook/callback',
         successRedirect: '/',
         failureRedirect: '/login'
     }));
-
-
-
-
-module.exports = {
-    router,
-    passport
 }
+
+
+
 
