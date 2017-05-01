@@ -3,7 +3,7 @@ $(function () {
         drawings
     });
 
-    $('savePNG').on('click', function (event) {
+    $('#savePNG').on('click', function (event) {
         event.preventDefault();
 
         function Drawing(textJSON) {
@@ -13,7 +13,6 @@ $(function () {
         var canvasToJSON = JSON.stringify(canvas);
         console.log(canvasToJSON);
         $.post('drawings', new Drawing(canvasToJSON));
+        alert('Your drawing has been saved!');
     });
-
-
 });
