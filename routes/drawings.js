@@ -14,6 +14,17 @@ router.post('/', function (req, res, next) {
     //     users.find({_id: req.session.userId})
 
     // }
+    if (usernameId == req.session.userId) {
+        users.find({ _id: req.session.userId }).then(function (data) {
+            users.update({'_id': usernameId}, {$set : {'drawing': drawing}})
+        }).catch(function(){
+            res.json('Drawing was not saved');
+        });
+    } 
+    // if(usernameId == req.user.facebook.id){
+    //     var facebookUsers = db.get('facebookUsers');
+    //     facebookUsers.update({'_id': usernameId}, {$set : {'drawing': drawing}});
+    // }
 
     drawings.find({ _id: drawing._id })
         .then(function (data) {
