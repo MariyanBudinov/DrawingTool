@@ -254,3 +254,108 @@ $(window).on("load", function() {
         canvas.freeDrawingBrush.shadow.offsetY = 0;
     }
 });
+
+$('#triangleFigure').click(function() {
+    var triangle = new fabric.Triangle({
+        width: 100,
+        height: 100,
+        stroke: canvas.freeDrawingBrush.color,
+        strokeWidth: canvas.freeDrawingBrush.width,
+        fill: "transparent",
+        left: 50,
+        top: 0
+    });
+    triangle.animate('top', 50, {
+        onChange: canvas.renderAll.bind(canvas),
+        duration: 2000,
+        easing: fabric.util.ease.easeoutBounce
+    });
+    canvas.add(triangle);
+});
+$('#filltriangleFigure').click(function() {
+    var triangle = new fabric.Triangle({
+        width: 100,
+        height: 100,
+        stroke: canvas.freeDrawingBrush.color,
+        fill: canvas.freeDrawingBrush.shadow.color,
+        strokeWidth: canvas.freeDrawingBrush.width,
+        left: 50,
+        top: 0
+    });
+    triangle.animate('top', 50, {
+        onChange: canvas.renderAll.bind(canvas),
+        duration: 2000,
+        easing: fabric.util.ease.easeoutBounce
+    });
+    canvas.add(triangle);
+});
+
+$('#rectangleFigure').click(function() {
+    var rectangle = new fabric.Rect({
+        width: 100,
+        height: 100,
+        stroke: canvas.freeDrawingBrush.color,
+        fill: "transparent",
+        strokeWidth: canvas.freeDrawingBrush.width,
+        left: 50,
+        top: 0
+    });
+    rectangle.animate('top', 50, {
+        onChange: canvas.renderAll.bind(canvas),
+        duration: 2000,
+        easing: fabric.util.ease.easeoutBounce
+    });
+    canvas.add(rectangle);
+});
+
+$('#fillrectangleFigure').click(function() {
+    var rectangle = new fabric.Rect({
+        width: 100,
+        height: 100,
+        stroke: canvas.freeDrawingBrush.color,
+        fill: canvas.freeDrawingBrush.shadow.color,
+        strokeWidth: canvas.freeDrawingBrush.width,
+        left: 50,
+        top: 0
+    });
+    rectangle.animate('top', 50, {
+        onChange: canvas.renderAll.bind(canvas),
+        duration: 2000,
+        easing: fabric.util.ease.easeoutBounce
+    });
+    canvas.add(rectangle);
+});
+
+$('#circleFigure').click(function() {
+    var circle = new fabric.Circle({
+        radius: 50,
+        left: 50,
+        top: 0,
+        stroke: canvas.freeDrawingBrush.color,
+        strokeWidth: canvas.freeDrawingBrush.width,
+        fill: "transparent"
+    });
+    circle.animate('top', 50, {
+        onChange: canvas.renderAll.bind(canvas),
+        duration: 2000,
+        easing: fabric.util.ease.easeoutBounce
+    });
+    canvas.add(circle);
+});
+
+$('#fillcircleFigure').click(function() {
+    var circle = new fabric.Circle({
+        radius: 50,
+        left: 50,
+        top: 0,
+        stroke: canvas.freeDrawingBrush.color,
+        strokeWidth: canvas.freeDrawingBrush.width,
+        fill: canvas.freeDrawingBrush.shadow.color
+    });
+    circle.animate('top', 50, {
+        onChange: canvas.renderAll.bind(canvas),
+        duration: 2000,
+        easing: fabric.util.ease.easeoutBounce
+    });
+    canvas.add(circle);
+});

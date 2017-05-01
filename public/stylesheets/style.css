@@ -113,7 +113,8 @@ LEFT NAV START
     overflow: hidden;
 }
 
-#brushesDropdown {
+#brushesDropdown,
+#figuresDropdown {
     text-transform: lowercase;
 }
 
@@ -128,7 +129,12 @@ LEFT NAV START
     border-radius: 0 !important;
 }
 
-ul, li {
+#konteinerche2 button {
+    border-radius: 0 !important;
+}
+
+ul,
+li {
     text-decoration: none;
     /*list-style: none;*/
 }
