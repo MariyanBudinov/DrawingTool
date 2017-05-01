@@ -9,10 +9,7 @@ router.post('/', function (req, res, next) {
   var users = db.get('users');
 
   users.find({ username: username }).then(function (data) {
-    if (data.length > 0) {
-      console.log(data);
-      console.log(data[0].password);
-      
+    if (data.length > 0) {      
       bcrypt.compare(password, data[0].password, function (err, res1) {
         if(err) res.render('login','message: Database error');
         if (res1) {
