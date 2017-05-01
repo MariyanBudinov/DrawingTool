@@ -29,32 +29,36 @@ header div button {
   opacity: 1 !important;
 }
 
-form {
+#registrationContainer {
+  box-sizing: border-box;
+}
+
+form, #registrationContainer  {
   margin: 0 30% 0 30%;
   color: white;
   display: inline-block;
 }
 
 @media screen and (max-width: 400px){
-  form {
+  form, #registrationContainer {
     margin: 0;
   }
 }
 
 @media screen and (min-width: 401px) and (max-width: 600px){
-  form {
+  form, #registrationContainer {
     margin: 0;
   }
 }
 
 @media screen and (min-width: 601px) and (max-width: 760px){
-  form {
+  form, #registrationContainer {
     margin: 0;
   }
 }
 
 @media screen and (min-width: 761px) and (max-width: 1024px){
-  form {
+  form, #registrationContainer {
     margin: 0 25% 0 25%;
   }
 }

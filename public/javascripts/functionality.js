@@ -127,6 +127,7 @@ $("#savePNG").click(function() {
 $('fbLogin').click(function(event) {
     event.preventDefault();
 });
+
 //////////////////////
 // LEFT NAV FUNCTIONS
 /////////////////////

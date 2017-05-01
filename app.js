@@ -14,6 +14,7 @@ var db = monk("mongodb://mariyan:1234@ds157980.mlab.com:57980/drawingtooldb-mm")
 
 
 var index = require('./routes/index');
+var register = require('./routes/register');
 var login = require('./routes/login');
 var logout = require('./routes/logout');
 
@@ -91,10 +92,8 @@ passport.use(new FacebookStrategy({
                 facebookUsers.insert(
                     ({
                         name: profile.displayName,
-
                         username: profile.username,
                         provider: 'facebook',
-
                         facebook: profile._json
                     }));
 
@@ -114,44 +113,18 @@ app.get('/auth/facebook/callback',
         failureRedirect: 'http://drawing-tool-mm.herokuapp.com/login'
     }));
 
-
-
-// app.use(passport);
-
-
-
 function requireLogin(req, res, next) {
     if (req.session.username || req.user) {
         next();
     }
-    // if (res.authResponse.accessToken){
-    //     next();
-    // }
     else {
         res.redirect('/login');
     }
 }
 
 app.use('/login', login);
+app.use('/register', register);
 app.use('/', requireLogin, index);
 app.use('/logout', logout);
-
-//catch 404 and forward to error handler
-// app.use(function (req, res, next) {
-//     var err = new Error('Not Found');
-//     err.status = 404;
-//     next(err);
-// });
-
-// // error handler
-// app.use(function (err, req, res, next) {
-//     // set locals, only providing error in development
-//     res.locals.message = err.message;
-//     res.locals.error = req.app.get('env') === 'development' ? err : {};
-
-//     // render the error page
-//     res.status(err.status || 500);
-//     res.render('error');
-//});
 
 module.exports = app;

@@ -21,20 +21,28 @@
             <h1 class="form-signin-heading" style="text-align: center">Welcome to Drawing Tool!</h1>
             <div class="form-group">
                 <label for="exampleInputEmail1" class="sr-only">Email address</label>
-                <input type="text" class="form-control" name="username" id="exampleInputEmail1" placeholder="Email" required autofocus>
+                <input type="text" class="form-control" name="username" id="exampleInputUsername" placeholder="Username" required autofocus>
             </div>
             <div class="form-group">
                 <label for="exampleInputEmail1" class="sr-only">Password</label>
-                <input type="password" class="form-control" name="password" id="exampleInputEmail1" placeholder="Password" required>
+                <input type="password" class="form-control" name="password" id="exampleInputPassword" placeholder="Password" required>
             </div>
             <div class="form-group">
-                <button class="btn btn-large btn-success">Sign in</button>
+                <button class="btn btn-large btn-success col-md-5 col-sm-5 col-lg-5 col-xs-5">Sign in</button>
+
                 <a id="fbLogin" class="loginButtons btn btn-large btn-primary" href="./auth/facebook">Login with Facebook</a>
             </div>
             <div class='form-group error' style="color:white;">
                 {{message}}
             </div>
         </form>
+        <div id="registrationContainer" class="form-singin col-lg-5 col-md-6 col-sm-6 col-xs-12" style="margin-top: 5px;">
+            {{!--<div class="form-group">--}}
+                <a class="col-md-12 col-sm-12 col-lg-12 col-xs-12 btn btn-large btn-success" id="registerButton" href="../register">
+                    Dont't have an account? Click here
+                </a>
+            {{!--</div>--}}
+        </div>
 
 
     </header>
