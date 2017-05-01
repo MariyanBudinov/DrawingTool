@@ -116,6 +116,7 @@ $(window).on("load", function() {
         var confirmed = confirm('Are you sure?');
         if (confirmed) {
             $("#brushesButton").removeClass("disabled");
+            $("#Rubber").removeClass("disabled");
             redoArrayObjects.splice(0, redoArrayObjects.length);
             canvas.clear();
             canvas.backgroundColor = "white";
