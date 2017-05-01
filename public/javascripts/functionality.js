@@ -43,8 +43,6 @@ $(window).on("load", function() {
         event.preventDefault();
         $("#sidebarLeft").toggleClass("sidebarWidth");
         $("#sidebarLeft").toggleClass("col-md-3 col-xs-12 col-sm-10 col-lg-3");
-        var obecti = canvas.getObjects();
-        console.log(obecti);
     });
 
     var redoArrayObjects = [];
@@ -54,8 +52,6 @@ $(window).on("load", function() {
         if (canvasObjects.length > 0) {
             $("#redo").removeClass("disabled");
             redoArrayObjects.push(canvasObjects.pop());
-            console.log(canvasObjects);
-            console.log(redoArrayObjects);
             this.canvas = canvasObjects;
             canvas.renderAll();
         } else {
@@ -68,8 +64,6 @@ $(window).on("load", function() {
         var canvasObjects = canvas.getObjects();
         if (redoArrayObjects.length > 0) {
             canvasObjects.push(redoArrayObjects.pop());
-            console.log(canvasObjects);
-            console.log(redoArrayObjects);
             this.canvas = canvasObjects;
             canvas.renderAll();
         } else {
@@ -108,11 +102,14 @@ $(window).on("load", function() {
     });
 
     $("#clearCanvas").click(function() {
-        $("#brushesButton").removeClass("disabled");
-        alert('Are you sure?')
-        canvas.clear()
-        canvas.backgroundColor = "white";
-        canvas.renderAll();
+        var confirmed = confirm('Are you sure?');
+        if (confirmed) {
+            $("#brushesButton").removeClass("disabled");
+            redoArrayObjects.splice(0, redoArrayObjects.length);
+            canvas.clear();
+            canvas.backgroundColor = "white";
+            canvas.renderAll();
+        }
     });
 
     function getEventTarget(e) {
@@ -122,7 +119,6 @@ $(window).on("load", function() {
 
     $("#brushesDropdown").click(function(event) {
         redoArrayObjects.splice(0, redoArrayObjects.length);
-        console.log(redoArrayObjects);
         var target = getEventTarget(event);
         switch (target.id) {
             case 'pencil':
