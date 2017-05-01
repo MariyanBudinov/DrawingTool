@@ -1,4 +1,5 @@
 $(window).on("load", function() {
+
     ///////////////
     //DOM ELEMENTS
     /////////////
@@ -22,14 +23,56 @@ $(window).on("load", function() {
     //MAIN NAV FUNCTIONS
     ///////////////////
 
-    // $("#savePNG").click(function() {
-    //     canvas.isDrawingMode = false;
-    //     drawingModeEl.innerHTML = '<img src="/images/paletteIcon.png" width=20 > Enter Drawing';
-    //     $("#brushesButton").addClass("disabled");
-    //     brushesButtonEl.innerHTML = '<img src="/images/cupIcon.png" width=20 > BRUSHES <span class="caret"></span>';
-    //     if (!window.localStorage) { alert("This function is not supported by your browser."); return; }
-    //     window.open(canvas.toDataURL('png'));
-    // });
+    var redoArrayObjects = [];
+    $("#undo").click(function(event) {
+        event.preventDefault();
+        var canvasObjects = canvas.getObjects();
+        if (canvasObjects.length > 0) {
+            $("#redo").removeClass("disabled");
+            redoArrayObjects.push(canvasObjects.pop());
+            this.canvas = canvasObjects;
+            canvas.renderAll();
+        } else {
+            alert("Sorry can't find what to remove!")
+        }
+    });
+
+    $("#redo").click(function(event) {
+        event.preventDefault();
+        var canvasObjects = canvas.getObjects();
+        if (redoArrayObjects.length > 0) {
+            canvasObjects.push(redoArrayObjects.pop());
+            this.canvas = canvasObjects;
+            canvas.renderAll();
+        } else {
+            $("#redo").addClass("disabled");
+        }
+    });
+
+    $('#openFile').change(function(e) {
+        var file = e.target.files[0];
+        var reader = new FileReader();
+        reader.onload = function(f) {
+            var data = f.target.result;
+            fabric.Image.fromURL(data, function(img) {
+                var oImg = img.set({ left: 50, top: 50, angle: 0 }).scale(0.9);
+                canvas.add(oImg).renderAll();
+                var objectActive = canvas.setActiveObject(oImg);
+                var dataURL = canvas.toDataURL({ format: 'png', quality: 0.8 });
+            });
+        };
+        reader.readAsDataURL(file);
+    });
+
+    $("#savePNG").click(function() {
+        canvas.isDrawingMode = false;
+        drawingModeEl.innerHTML = '<img src="/images/paletteIcon.png" width=20 > Enter Drawing';
+        $("#brushesButton").addClass("disabled");
+        brushesButtonEl.innerHTML = '<img src="/images/cupIcon.png" width=20 > BRUSHES <span class="caret"></span>';
+        if (!window.localStorage) { alert("This function is not supported by your browser."); return; }
+        window.open(canvas.toDataURL('png'));
+    });
+
 
 
     $('fbLogin').click(function(event) {
@@ -68,19 +111,33 @@ $(window).on("load", function() {
         if (canvas.isDrawingMode) {
             drawingModeEl.innerHTML = '<span class="glyphicon glyphicon-move"></span> Cancel Drawing';
             $("#brushesButton").removeClass("disabled");
+            $("#deleteObject").addClass("hidenElement");
         } else {
             drawingModeEl.innerHTML = '<img src="/images/paletteIcon.png" width=20 > Enter Drawing';
             $("#brushesButton").addClass("disabled");
+            $("#deleteObject").removeClass("hidenElement");
             brushesButtonEl.innerHTML = '<img src="/images/cupIcon.png" width=20 > BRUSHES <span class="caret"></span>';
         }
     });
 
+    $("#deleteObject").click(function() {
+        if (canvas.getActiveObject()) {
+            canvas.getActiveObject().remove();
+        } else {
+            alert("Please select object!")
+        }
+    });
+
     $("#clearCanvas").click(function() {
-        $("#brushesButton").removeClass("disabled");
-        alert('Are you sure?')
-        canvas.clear()
-        canvas.backgroundColor = "white";
-        canvas.renderAll();
+        var confirmed = confirm('Are you sure?');
+        if (confirmed) {
+            $("#brushesButton").removeClass("disabled");
+            $("#Rubber").removeClass("disabled");
+            redoArrayObjects.splice(0, redoArrayObjects.length);
+            canvas.clear();
+            canvas.backgroundColor = "white";
+            canvas.renderAll();
+        }
     });
 
     function getEventTarget(e) {
@@ -89,6 +146,7 @@ $(window).on("load", function() {
     }
 
     $("#brushesDropdown").click(function(event) {
+        redoArrayObjects.splice(0, redoArrayObjects.length);
         var target = getEventTarget(event);
         switch (target.id) {
             case 'pencil':
