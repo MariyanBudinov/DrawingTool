@@ -43,6 +43,38 @@ $(window).on("load", function() {
         event.preventDefault();
         $("#sidebarLeft").toggleClass("sidebarWidth");
         $("#sidebarLeft").toggleClass("col-md-3 col-xs-12 col-sm-10 col-lg-3");
+        var obecti = canvas.getObjects();
+        console.log(obecti);
+    });
+
+    var redoArrayObjects = [];
+    $("#undo").click(function(event) {
+        event.preventDefault();
+        var canvasObjects = canvas.getObjects();
+        if (canvasObjects.length > 0) {
+            $("#redo").removeClass("disabled");
+            redoArrayObjects.push(canvasObjects.pop());
+            console.log(canvasObjects);
+            console.log(redoArrayObjects);
+            this.canvas = canvasObjects;
+            canvas.renderAll();
+        } else {
+            alert("Sorry can't find what to remove!")
+        }
+    });
+
+    $("#redo").click(function(event) {
+        event.preventDefault();
+        var canvasObjects = canvas.getObjects();
+        if (redoArrayObjects.length > 0) {
+            canvasObjects.push(redoArrayObjects.pop());
+            console.log(canvasObjects);
+            console.log(redoArrayObjects);
+            this.canvas = canvasObjects;
+            canvas.renderAll();
+        } else {
+            $("#redo").addClass("disabled");
+        }
     });
 
     $("#PaintBucket").click(function() {
@@ -89,6 +121,8 @@ $(window).on("load", function() {
     }
 
     $("#brushesDropdown").click(function(event) {
+        redoArrayObjects.splice(0, redoArrayObjects.length);
+        console.log(redoArrayObjects);
         var target = getEventTarget(event);
         switch (target.id) {
             case 'pencil':
