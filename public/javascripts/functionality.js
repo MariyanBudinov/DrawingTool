@@ -55,7 +55,7 @@ $(window).on("load", function() {
         reader.onload = function(f) {
             var data = f.target.result;
             fabric.Image.fromURL(data, function(img) {
-                var oImg = img.set({ left: 50, top: 50, angle: 0 }).scale(0.9);
+                var oImg = img.set({ left: 50, top: 50, angle: 0, width: 100, height: 100 }).scale(0.9);
                 canvas.add(oImg).renderAll();
                 var objectActive = canvas.setActiveObject(oImg);
                 var dataURL = canvas.toDataURL({ format: 'png', quality: 0.8 });
@@ -72,8 +72,6 @@ $(window).on("load", function() {
     //     if (!window.localStorage) { alert("This function is not supported by your browser."); return; }
     //     window.open(canvas.toDataURL('png'));
     // });
-
-
 
     $('fbLogin').click(function(event) {
         event.preventDefault();
@@ -102,7 +100,7 @@ $(window).on("load", function() {
 
     $("#Rubber").click(function() {
         canvas.freeDrawingBrush = rubberBrush;
-        canvas.freeDrawingBrush.color = backgroundColorEl.value;
+        canvas.freeDrawingBrush.color = canvas.backgroundColor;
         canvas.freeDrawingBrush.width = parseInt(drawingLineWidthEl.value, 10) || 1;
     });
 
