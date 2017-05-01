@@ -112,7 +112,17 @@ LEFT NAV START
 .BrushTools {
     padding-top: 5px;
     width: 30px;
-    height: auto;
+    height: 30px;
+}
+
+#konteinerche button {
+    /*margin: 5px 0 0 0;*/
+    border-radius: 0 !important;
+}
+
+ul, li {
+    text-decoration: none;
+    /*list-style: none;*/
 }
 
 .BrushTools:hover {
