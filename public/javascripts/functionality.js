@@ -22,14 +22,14 @@ $(window).on("load", function() {
     //MAIN NAV FUNCTIONS
     ///////////////////
 
-    $("#savePNG").click(function() {
-        canvas.isDrawingMode = false;
-        drawingModeEl.innerHTML = '<img src="/images/paletteIcon.png" width=20 > Enter Drawing';
-        $("#brushesButton").addClass("disabled");
-        brushesButtonEl.innerHTML = '<img src="/images/cupIcon.png" width=20 > BRUSHES <span class="caret"></span>';
-        if (!window.localStorage) { alert("This function is not supported by your browser."); return; }
-        window.open(canvas.toDataURL('png'));
-    });
+    // $("#savePNG").click(function() {
+    //     canvas.isDrawingMode = false;
+    //     drawingModeEl.innerHTML = '<img src="/images/paletteIcon.png" width=20 > Enter Drawing';
+    //     $("#brushesButton").addClass("disabled");
+    //     brushesButtonEl.innerHTML = '<img src="/images/cupIcon.png" width=20 > BRUSHES <span class="caret"></span>';
+    //     if (!window.localStorage) { alert("This function is not supported by your browser."); return; }
+    //     window.open(canvas.toDataURL('png'));
+    // });
 
 
     $('fbLogin').click(function(event) {

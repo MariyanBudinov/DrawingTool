@@ -40,7 +40,7 @@
 								<a id="undo" class="btn" role="menuitem" tabindex="-1" href="#"><span class="glyphicon glyphicon-arrow-left"> Undo</a>
 							</li>
 							<li>
-								<a id="redo" class="btn"role="menuitem" tabindex="-1" href="#"><span class="glyphicon glyphicon-arrow-right"> Redo</a>
+								<a id="redo" class="btn" role="menuitem" tabindex="-1" href="#"><span class="glyphicon glyphicon-arrow-right"> Redo</a>
 							</li>
 							<li>
 								<a id="uploadFile" class="btn" role="menuitem" tabindex="-1" href="#">
@@ -49,14 +49,16 @@
 								</a>
 							</li>
 							<li>
-								<a id="savePNG" class="btn" role="menuitem" tabindex="-1" href="#"><span class="glyphicon glyphicon-floppy-save"> Save</a>
+								<form action="/drawings" method="post">
+									<input type="submit" id="savePNG" class="btn" role="menuitem" tabindex="-1"><span class="glyphicon glyphicon-floppy-save"> Save</a>
+								</form>
 							</li>
 							<li>
 								<a href="/logout" class="btn btn-large btn-danger">Logout</a>
 							</li>
 						</ul>
 					</div>
-					
+
 					<!-- /.nav-collapse -->
 				</div>
 				<!-- /.container -->
@@ -95,8 +97,7 @@
 								<a id="square" class="btn" href="#"><img id="square" class="BrushTools" src="/images/squareIcon.png" alt=""> Square</a>
 							</li>
 							<li id="texture">
-								<a id="texture" class="btn" href="#" data-toggle="collapse" data-target="#collapseExample2" aria-expanded="false"
-								 aria-controls="collapseExample2"><img id="texture" class="BrushTools" src="/images/textureIcon.png" alt=""> Texture</a>
+								<a id="texture" class="btn" href="#" data-toggle="collapse" data-target="#collapseExample2" aria-expanded="false" aria-controls="collapseExample2"><img id="texture" class="BrushTools" src="/images/textureIcon.png" alt=""> Texture</a>
 								<div class="collapse" id="collapseExample2">
 									<div id="TextureList" class="well">
 										<img id="lava" class="BrushTools" src="/images/lavaIcon.png" alt="lava">
