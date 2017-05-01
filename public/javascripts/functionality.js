@@ -17,6 +17,7 @@ $(window).on("load", function() {
     var backgroundColorEl = $id('colorBackground');
     var drawingModeEl = $id('changeMode');
 
+
     /////////////////////
     //MAIN NAV FUNCTIONS
     ///////////////////
@@ -29,6 +30,7 @@ $(window).on("load", function() {
         if (!window.localStorage) { alert("This function is not supported by your browser."); return; }
         window.open(canvas.toDataURL('png'));
     });
+
 
     $('fbLogin').click(function(event) {
         event.preventDefault();
