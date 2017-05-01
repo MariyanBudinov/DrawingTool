@@ -1,4 +1,5 @@
 $(window).on("load", function() {
+
     ///////////////
     //DOM ELEMENTS
     /////////////
@@ -21,29 +22,6 @@ $(window).on("load", function() {
     /////////////////////
     //MAIN NAV FUNCTIONS
     ///////////////////
-
-    $("#savePNG").click(function() {
-        canvas.isDrawingMode = false;
-        drawingModeEl.innerHTML = '<img src="/images/paletteIcon.png" width=20 > Enter Drawing';
-        $("#brushesButton").addClass("disabled");
-        brushesButtonEl.innerHTML = '<img src="/images/cupIcon.png" width=20 > BRUSHES <span class="caret"></span>';
-        if (!window.localStorage) { alert("This function is not supported by your browser."); return; }
-        window.open(canvas.toDataURL('png'));
-    });
-
-
-    $('fbLogin').click(function(event) {
-        event.preventDefault();
-    });
-    //////////////////////
-    // LEFT NAV FUNCTIONS
-    /////////////////////
-
-    $("#toolsBtnToggle").click(function(event) {
-        event.preventDefault();
-        $("#sidebarLeft").toggleClass("sidebarWidth");
-        $("#sidebarLeft").toggleClass("col-md-3 col-xs-12 col-sm-10 col-lg-3");
-    });
 
     var redoArrayObjects = [];
     $("#undo").click(function(event) {
@@ -71,6 +49,29 @@ $(window).on("load", function() {
         }
     });
 
+    $("#savePNG").click(function() {
+        canvas.isDrawingMode = false;
+        drawingModeEl.innerHTML = '<img src="/images/paletteIcon.png" width=20 > Enter Drawing';
+        $("#brushesButton").addClass("disabled");
+        brushesButtonEl.innerHTML = '<img src="/images/cupIcon.png" width=20 > BRUSHES <span class="caret"></span>';
+        if (!window.localStorage) { alert("This function is not supported by your browser."); return; }
+        window.open(canvas.toDataURL('png'));
+    });
+
+
+    $('fbLogin').click(function(event) {
+        event.preventDefault();
+    });
+    //////////////////////
+    // LEFT NAV FUNCTIONS
+    /////////////////////
+
+    $("#toolsBtnToggle").click(function(event) {
+        event.preventDefault();
+        $("#sidebarLeft").toggleClass("sidebarWidth");
+        $("#sidebarLeft").toggleClass("col-md-3 col-xs-12 col-sm-10 col-lg-3");
+    });
+
     $("#PaintBucket").click(function() {
         canvas.backgroundColor = backgroundColorEl.value;
         canvas.renderAll();
@@ -94,10 +95,20 @@ $(window).on("load", function() {
         if (canvas.isDrawingMode) {
             drawingModeEl.innerHTML = '<span class="glyphicon glyphicon-move"></span> Cancel Drawing';
             $("#brushesButton").removeClass("disabled");
+            $("#deleteObject").addClass("hidenElement");
         } else {
             drawingModeEl.innerHTML = '<img src="/images/paletteIcon.png" width=20 > Enter Drawing';
             $("#brushesButton").addClass("disabled");
+            $("#deleteObject").removeClass("hidenElement");
             brushesButtonEl.innerHTML = '<img src="/images/cupIcon.png" width=20 > BRUSHES <span class="caret"></span>';
+        }
+    });
+
+    $("#deleteObject").click(function() {
+        if (canvas.getActiveObject()) {
+            canvas.getActiveObject().remove();
+        } else {
+            alert("Please select object!")
         }
     });
 
