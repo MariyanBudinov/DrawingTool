@@ -24,6 +24,14 @@ MAIN NAVIGATION
     filter: drop-shadow(3px 3px 3px black);
 }
 
+#logoutButton {
+    color: white;
+}
+
+#logoutButton:hover {
+    background-color: #C9302C;
+}
+
 .row-eq-height {
     display: -webkit-box;
     display: -moz-box;
