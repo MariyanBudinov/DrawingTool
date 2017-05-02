@@ -17,7 +17,8 @@ router.post('/', function (req, res, next) {
             bcrypt.hash(password, 10, function (err, hash) {
                 users.insert(({
                     username: username,
-                    password: hash
+                    password: hash,
+                    drawing: ''
                 }));
             })
             res.redirect('/');
