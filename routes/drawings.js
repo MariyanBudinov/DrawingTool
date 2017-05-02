@@ -7,8 +7,14 @@ router.post('/', function (req, res, next) {
     var db = req.db;
     var usernameId = req.session.userId || req.user.facebook.id;
     var drawing = req.body;
-
     var drawings = db.get('drawings');
+
+    var users = db.get('users');
+    // if(req.session.userId){
+    //     users.find({_id: req.session.userId})
+
+    // }
+
     drawings.find({ _id: drawing._id })
         .then(function (data) {
             if (data.length != 0)

@@ -139,11 +139,11 @@ li {
     /*list-style: none;*/
 }
 
-.BrushTools:hover {
+#TextureList .BrushTools:hover {
     box-shadow: 1px 1px 1px #222;
 }
 
-.BrushTools:active {
+#TextureList .BrushTools:active {
     box-shadow: 0px 0px 0px #222;
     border: solid 2px white;
 }
